@@ -8,6 +8,10 @@ import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
+
+/*
+kalau entities nmbh, data interface Dao nya juga tmbh
+ */
 @Dao
 interface SiswaDao {
 

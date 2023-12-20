@@ -11,3 +11,13 @@ data class Siswa(
     val alamat : String,
     val telpon : String
 )
+/*
+intuk nmbh data perlu nmbh data class juga yg berupa entity
+data class Mapel(
+    @PrimaryKey(autoGenerate = true)
+    val id : Int = 0,
+    val nama : String,
+    val alamat : String,
+    val telpon : String
+)
+ */

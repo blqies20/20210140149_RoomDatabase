@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.activity7_roomsiswa"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.activity7_roomsiswa"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
