@@ -1,5 +1,6 @@
 package com.example.activity7_roomsiswa.ui.halaman
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -49,6 +50,7 @@ object DestinasiHome : DestinasiNavigasi{
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
+    onDetailClick: (Int) -> Unit = {},
     viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -78,15 +80,17 @@ fun HomeScreen(
         val uiStateSiswa by viewModel.homeUiState.collectAsState()
         BodyHome(
             itemSiswa = uiStateSiswa.listSiswa,
-            modifier = Modifier.padding(innerPadding).fillMaxSize()
-            )
+            modifier = Modifier.padding(innerPadding).fillMaxSize(),
+            onSiswaClick = onDetailClick
+        )
     }
 }
 
 @Composable
 fun BodyHome(
     itemSiswa: List<Siswa>,
-    modifier: Modifier=Modifier
+    modifier: Modifier=Modifier,
+    onSiswaClick: (Int) -> Unit = {}
 ){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -101,8 +105,9 @@ fun BodyHome(
         }else{
             ListSiswa(
                 itemSiswa = itemSiswa,
-                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
-                )
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)),
+                onItemClick = {onSiswaClick(it.id)}
+            )
         }
     }
 }
@@ -110,14 +115,15 @@ fun BodyHome(
 @Composable
 fun ListSiswa(
     itemSiswa : List<Siswa>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onItemClick: (Siswa) -> Unit
 ){
     LazyColumn(modifier = modifier){
         items(items = itemSiswa, key = {it.id}){
             person ->
             DataSiswa(
                 siswa = person,
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)))
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)).clickable{onItemClick(person)})
         }
     }
 }
